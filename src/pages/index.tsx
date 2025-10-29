@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getProduct } from "./api/getListApi";
+import { getProduct } from "@/api/getListApi";
 import Loading from "@/components/Loading";
 
 export default function Home() {
