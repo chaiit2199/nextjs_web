@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "./animation.css";
+@import "./footer.css";
+
+@layer base {
+  body {
+    @apply w-full h-full relative;
+  }
+}
+
