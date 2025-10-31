@@ -11,6 +11,7 @@
 @custom-variant md (@media (max-width: 768px));
 @custom-variant sm (@media (max-width: 640px));
 
+@import "./component/header.css";
 @import "./animation.css";
 @import "./footer.css";
 
