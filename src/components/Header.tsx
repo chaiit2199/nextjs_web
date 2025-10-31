@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import menuData from '@/private/menu.json';
 
 interface SubMenuItem {
@@ -22,6 +22,28 @@ export default function Header() {
   const menuItems: MenuItem[] = menuData.menuItems;
   const pathname = usePathname();
   const [hoveredMenu, setHoveredMenu] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Nếu scroll xuống và đã scroll quá một khoảng nhỏ (ví dụ 10px)
+      if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        setIsVisible(false); // Ẩn header
+      } 
+      // Nếu scroll lên
+      else if (currentScrollY < lastScrollY) {
+        setIsVisible(true); // Hiện header
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -31,7 +53,9 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black relative z-50">
+    <header className={`w-full border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black fixed top-0 left-0 right-0 z-50 transition-transform duration-500 ease-in-out ${
+      isVisible ? 'translate-y-0' : '-translate-y-[200px]'
+    }`}>
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link  href="/" className="text-xl font-bold text-black dark:text-white">
