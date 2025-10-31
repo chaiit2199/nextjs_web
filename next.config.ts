@@ -9,10 +9,10 @@ const nextConfig: NextConfig = {
         hostname: "ochakanextjs.vercel.app",
         pathname: "/images/**",
       },
-      {
+     {
         protocol: "https",
-        hostname: "fakestoreapi.com",
-        pathname: "/img/**",
+        hostname: "cdn.dummyjson.com",
+        pathname: "/product-images/**",
       },
     ],
   },

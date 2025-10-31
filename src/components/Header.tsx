@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -32,10 +33,16 @@ export default function Header() {
 
   return (
     <header className="w-full border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black relative z-50">
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <Link  href="/" className="text-xl font-bold text-black dark:text-white">
-            My App
+            <Image
+              src="/icons/logo.svg"
+              alt="Next.js logo"  
+              width={150}
+              height={80} 
+              
+            />
           </Link>
           
           <ul className="flex gap-6 items-center">

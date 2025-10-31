@@ -1,12 +1,13 @@
 import { API } from '@/constants/endpoint';
 import http from './http';
 
-// const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL 
+const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL 
  
-export async function getProduct() {
-  try { 
-    const path = API.PRODUCT.LIST; 
-    const { data } = await http.get(path); 
+export async function getProduct(limit: number, skip: number) {
+  try {  
+    const queryParams = new URLSearchParams({ limit: String(limit), skip: String(skip) }).toString();
+    const url = `${NEXT_PUBLIC_API_BASE_URL}${API.PRODUCT.LIST}?${queryParams}`;
+    const { data } = await http.get(url);
 
     return {
       success: true,

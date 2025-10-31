@@ -1,5 +1,6 @@
 export const API = {
   PRODUCT: {
-    LIST: '/fake_data/product.json'
+    FAKE: 'fake_data/product.json',
+    LIST: '/products'
   }, 
 };
