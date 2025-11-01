@@ -30,13 +30,12 @@ export default function Header() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Nếu scroll xuống và đã scroll quá một khoảng nhỏ (ví dụ 10px)
       if (currentScrollY > lastScrollY && currentScrollY > 10) {
         setIsVisible(false); // Ẩn header
-      } 
-      // Nếu scroll lên
+      }  
       else if (currentScrollY < lastScrollY) {
-        setIsVisible(true); // Hiện header
+        // show header
+        setIsVisible(true); 
       }
 
       setLastScrollY(currentScrollY);
@@ -55,38 +54,25 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className={`header-inner ${isVisible ? 'translate-y-0' : '-translate-y-[200px]'}`}>
-        <div className="container">
+      <div className={`header-inner ${isVisible ? 'translate-y-0' : '-translate-y-[100px]'}`}>
+        <div className="container-fluid px-10">
           <div className="flex items-center justify-between">
-            <Link  href="/" className="logo">
-              <Image
-                src="/icons/logo.svg"
-                alt="Next.js logo"  
-                width={150}
-                height={80} 
-                
-              />
+            <Link  href="/" className="logo"> 
+              <img alt="Next.js logo" loading="lazy" width="150" height="80" className="lazyload" src="/icons/logo.svg"></img>
             </Link>
             
-            <ul className="flex gap-6 items-center">
+            <ul className="header-menu">
               {menuItems.map((item) => {
                 const active = isActive(item.href);
                 const hasSubmenu = item.submenu && item.submenu.length > 0;
                 return (
                   <li 
                     key={item.id}
-                    className="relative py-4"
+                    className="relative py-5"
                     onMouseEnter={() => hasSubmenu && setHoveredMenu(item.id)}
                     onMouseLeave={() => setHoveredMenu(null)}
                   >
-                    <Link
-                      href={item.href}
-                      className={`transition-colors inline-flex items-center gap-1 ${
-                        active
-                          ? 'text-black dark:text-white font-medium border-b-2 border-black dark:border-white pb-1'
-                          : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
-                      }`}
-                    >
+                    <Link href={item.href} className={`menu-item ${active ? 'active' : 'inactive'}`}>
                       {item.label}
                       {hasSubmenu && (
                         <svg className="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,6 +112,79 @@ export default function Header() {
                 );
               })}
             </ul>
+
+            <div className="header-right">
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.5 20.25a8.25 8.25 0 0 1 15 0"
+                  />
+                </svg>
+              </button>
+
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-4.35-4.35M9.75 17.25a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"
+                  />
+                </svg>
+              </button>
+
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 8.25c0-2.486-2.014-4.5-4.5-4.5a4.5 4.5 0 0 0-3.364 1.528A4.5 4.5 0 0 0 9.772 3.75c-2.486 0-4.5 2.014-4.5 4.5 0 5.25 6.75 9.75 6.75 9.75s6.75-4.5 6.75-9.75z"
+                  />
+                </svg>
+              </button>
+
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 2.25h1.5l1.5 12h12.75l1.5-9H6M9 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm9 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0z"
+                  />
+                </svg>
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  0
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

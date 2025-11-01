@@ -11,13 +11,21 @@
 @custom-variant md (@media (max-width: 768px));
 @custom-variant sm (@media (max-width: 640px));
 
-@import "./component/header.css";
+@import "./component/index.css";
 @import "./animation.css";
-@import "./footer.css";
 
 @layer base {
+  *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
   .container {
     @apply mx-auto px-4 max-w-7xl;
+  }
+
+  .container-fluid {
+    @apply w-full px-4;
   }
 
   body {
